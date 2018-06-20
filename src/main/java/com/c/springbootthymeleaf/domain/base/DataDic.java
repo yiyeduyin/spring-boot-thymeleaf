@@ -1,11 +1,8 @@
 package com.c.springbootthymeleaf.domain.base;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
@@ -31,7 +28,7 @@ public class DataDic implements Serializable {
 	private String description;
 
 	@Column(name="create_time")
-	private Timestamp createTime;
+	private Date createTime;
 
 	public Integer getId() {
 		return id;
@@ -65,11 +62,11 @@ public class DataDic implements Serializable {
 		this.description = description;
 	}
 
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 }

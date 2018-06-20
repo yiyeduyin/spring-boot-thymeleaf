@@ -48,10 +48,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.csrf().disable();
 
 		http.authorizeRequests()
-			.anyRequest().authenticated()
-			.and()
+			.antMatchers("/**").permitAll().and() //不拦截
+//			.anyRequest().authenticated().and()
 			.formLogin().and()
-			.httpBasic();
+			.httpBasic().and()
+			.csrf().disable();
     }
 
     @Override

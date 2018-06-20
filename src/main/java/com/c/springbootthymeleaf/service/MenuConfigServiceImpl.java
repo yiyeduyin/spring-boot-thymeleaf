@@ -8,8 +8,10 @@ import com.c.springbootthymeleaf.reposiritory.base.DataDicRepository;
 import com.c.springbootthymeleaf.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -100,7 +102,7 @@ public class MenuConfigServiceImpl implements MenuConfigService {
     }
 
     @Override
-    public ShopMenuConfigDto getsShopMenuConfig() {
+    public ShopMenuConfigDto getEShopMenuConfig() {
         DataDic dataDic = dataDicRepository.findByDataCode(Constant.shopCode);
         JSONObject object = JSON.parseObject(dataDic.getDataValue());
         String color = object.getString("color");
@@ -114,4 +116,108 @@ public class MenuConfigServiceImpl implements MenuConfigService {
 
         return configDto;
     }
+
+    @Override
+    public void updateCampaignMenuConfig(CampaignMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.campaignCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.campaignCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updateCollectionMenuConfig(CollectionMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.collectionCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.collectionCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updateIndexMenuConfig(IndexMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.indexCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.indexCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updatePressMenuConfig(PressMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.pressCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.pressCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updateProjectMenuConfig(ProjectMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.projectCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.projectCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updateEShopMenuConfig(ShopMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.eShopCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.eShopCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+
 }
