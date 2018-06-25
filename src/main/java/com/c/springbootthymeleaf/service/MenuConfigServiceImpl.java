@@ -102,7 +102,23 @@ public class MenuConfigServiceImpl implements MenuConfigService {
     }
 
     @Override
-    public ShopMenuConfigDto getEShopMenuConfig() {
+    public EShopMenuConfigDto getEShopMenuConfig() {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.eShopCode);
+        JSONObject object = JSON.parseObject(dataDic.getDataValue());
+        String color = object.getString("color");
+        String backgroupPicturesStr = object.getString("backgroupPictures");
+        backgroupPicturesStr.split(",");
+        List<String> pics = Arrays.asList(backgroupPicturesStr.split(","));
+
+        EShopMenuConfigDto configDto = new EShopMenuConfigDto();
+        configDto.setMenuFontColour(color);
+        configDto.setBackgroupPictures(pics);
+
+        return configDto;
+    }
+
+    @Override
+    public ShopMenuConfigDto getShopMenuConfig() {
         DataDic dataDic = dataDicRepository.findByDataCode(Constant.shopCode);
         JSONObject object = JSON.parseObject(dataDic.getDataValue());
         String color = object.getString("color");
@@ -111,6 +127,22 @@ public class MenuConfigServiceImpl implements MenuConfigService {
         List<String> pics = Arrays.asList(backgroupPicturesStr.split(","));
 
         ShopMenuConfigDto configDto = new ShopMenuConfigDto();
+        configDto.setMenuFontColour(color);
+        configDto.setBackgroupPictures(pics);
+
+        return configDto;
+    }
+
+    @Override
+    public MoreinfoConfigDto getMoreinfoMenuConfig() {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.moreinfoCode);
+        JSONObject object = JSON.parseObject(dataDic.getDataValue());
+        String color = object.getString("color");
+        String backgroupPicturesStr = object.getString("backgroupPictures");
+        backgroupPicturesStr.split(",");
+        List<String> pics = Arrays.asList(backgroupPicturesStr.split(","));
+
+        MoreinfoConfigDto configDto = new MoreinfoConfigDto();
         configDto.setMenuFontColour(color);
         configDto.setBackgroupPictures(pics);
 
@@ -203,11 +235,45 @@ public class MenuConfigServiceImpl implements MenuConfigService {
     }
 
     @Override
-    public void updateEShopMenuConfig(ShopMenuConfigDto configDto) {
+    public void updateEShopMenuConfig(EShopMenuConfigDto configDto) {
         DataDic dataDic = dataDicRepository.findByDataCode(Constant.eShopCode);
         if(dataDic == null){
             dataDic = new DataDic();
             dataDic.setDataCode(Constant.eShopCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updateShopMenuConfig(ShopMenuConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.shopCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.shopCode);
+            dataDic.setCreateTime(new Date());
+        }
+        List<String> list = configDto.getBackgroupPictures();
+        String pics = StringUtils.collectionToDelimitedString(list, ",");
+        JSONObject object = new JSONObject();
+        object.put("color", configDto.getMenuFontColour());
+        object.put("backgroupPictures",pics);
+        dataDic.setDataValue(object.toJSONString());
+        dataDicRepository.save(dataDic);
+    }
+
+    @Override
+    public void updateMoreinfoConfig(MoreinfoConfigDto configDto) {
+        DataDic dataDic = dataDicRepository.findByDataCode(Constant.moreinfoCode);
+        if(dataDic == null){
+            dataDic = new DataDic();
+            dataDic.setDataCode(Constant.moreinfoCode);
             dataDic.setCreateTime(new Date());
         }
         List<String> list = configDto.getBackgroupPictures();

@@ -7,9 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * porject
+ * shop
  */
-public class ProjectMenuConfigDto implements Serializable {
+public class MoreinfoConfigDto implements Serializable {
 
     /**
      * 菜单字体颜色

@@ -14,7 +14,11 @@ public interface MenuConfigService {
 
     ProjectMenuConfigDto getProjectMenuConfig();
 
-    ShopMenuConfigDto getEShopMenuConfig();
+    EShopMenuConfigDto getEShopMenuConfig();
+
+    ShopMenuConfigDto getShopMenuConfig();
+
+    MoreinfoConfigDto getMoreinfoMenuConfig();
 
     void updateCampaignMenuConfig(CampaignMenuConfigDto configDto);
 
@@ -26,5 +30,9 @@ public interface MenuConfigService {
 
     void updateProjectMenuConfig(ProjectMenuConfigDto configDto);
 
-    void updateEShopMenuConfig(ShopMenuConfigDto configDto);
+    void updateEShopMenuConfig(EShopMenuConfigDto configDto);
+
+    void updateShopMenuConfig(ShopMenuConfigDto configDto);
+
+    void updateMoreinfoConfig(MoreinfoConfigDto configDto);
 }
